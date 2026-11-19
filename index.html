@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Putri</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+  body{background:linear-gradient(180deg,#ff8fc7,#ffb3dd,#ffcce8);min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;color:white;padding:20px}
+  .page{display:none;width:100%;max-width:450px}
+  .page.active{display:block}
+  h1{font-weight:400;font-size:26px;line-height:1.5}
+  .name{font-family:Georgia,serif;font-style:italic;font-size:42px;margin-top:5px}
+  .pin-dots{display:flex;gap:12px;justify-content:center;margin:20px 0}
+  .dot{width:22px;height:22px;border:2px solid white;border-radius:50%}
+  .dot.filled{background:white}
+  .keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:280px;margin:0 auto}
+  .key{width:70px;height:70px;border:1.5px solid white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;cursor:pointer;background:rgba(255,255,255,0.2);color:white}
+  .key:active{background:rgba(255,255,255,0.5)}
+  .card{background:rgba(255,255,255,0.95);color:#5a3a3a;padding:28px 22px;border-radius:20px;line-height:1.7;font-size:15px}
+  .card h2{font-family:Georgia,serif;font-style:italic;font-weight:400;margin-bottom:12px}
+  .btn{background:#ff5da8;color:white;border:none;padding:13px 32px;border-radius:30px;font-size:16px;cursor:pointer;margin-top:18px}
+  .btn-white{background:white;color:#ff5da8}
+  .popup{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}
+  .popup.show{display:flex}
+  .popup-box{background:white;color:#333;padding:30px 20px;border-radius:20px;width:100%;max-width:320px}
+  .popup-box h2{margin:10px 0}
+  .x-circle{width:70px;height:70px;border:3px solid #ff5da8;color:#ff5da8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto}
+  .check-circle{width:70px;height:70px;border:3px solid #7cc79a;color:#7cc79a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto}
+  input,textarea{width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;margin-top:15px;font-size:15px;outline:none}
+  textarea{height:90px;resize:none}
+  #noBtn{position:fixed;z-index:5;transition:0.2s}
+  .heart-white{color:white}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 : INTRO -->
+<div class="page active" id="page1">
+  <h1 id="typing"></h1>
+  <div class="name" id="namePutri" style="display:none">"Putri"</div>
+</div>
+
+<!-- PAGE 2 : PIN -->
+<div class="page" id="page2">
+  <h1 style="font-weight:600">Enter Secret PIN</h1>
+  <div class="pin-dots" id="dots">
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+  </div>
+  <div class="keypad">
+    <div class="key" onclick="press('1')">1</div>
+    <div class="key" onclick="press('2')">2</div>
+    <div class="key" onclick="press('3')">3</div>
+    <div class="key" onclick="press('4')">4</div>
+    <div class="key" onclick="press('5')">5</div>
+    <div class="key" onclick="press('6')">6</div>
+    <div class="key" onclick="press('7')">7</div>
+    <div class="key" onclick="press('8')">8</div>
+    <div class="key" onclick="press('9')">9</div>
+    <div class="key" onclick="press('0')">0</div>
+    <div class="key" style="font-size:14px" onclick="clearPin()">CLEAR</div>
+  </div>
+</div>
+
+<!-- PAGE 3 : SURAT -->
+<div class="page" id="page3">
+  <div class="card">
+    <h2>Hai Putri,</h2>
+    <p>
+      Jujur, aku udah lama pengen ngomong ini, tapi aku selalu kehabisan berani tiap mau ngomong langsung ke kamu.
+      <br><br>
+      Aku nggak tau sejak kapan, tapi setiap ada kamu, rasanya tuh beda. Aku jadi lebih sering senyum sendiri, lebih sering ngecek hp, dan lebih sering takut kalau kamu tiba-tiba menjauh.
+      <br><br>
+      Aku bukan tipe orang yang gampang bilang suka ke orang lain. Justru karena aku beneran suka sama kamu, makanya aku malu banget buat ngungkapinnya. Aku takut kalau setelah aku jujur, semuanya jadi canggung.
+      <br><br>
+      Tapi aku capek nyimpen ini sendirian. Aku nggak minta kamu langsung jawab apa-apa. Aku cuma mau kamu tau, kalau ada seseorang yang diam-diam selalu merhatiin kamu dari jauh dan berharap kamu bahagia terus.
+      <br><br>
+      Dan setelah semua yang aku tulis ini, ada satu hal lagi yang belum berani aku bilang langsung ke kamu.
+    </p>
+    <button class="btn" onclick="showPage('page4')">Next?</button>
+  </div>
+</div>
+
+<!-- PAGE 4 : TEMBAK -->
+<div class="page" id="page4">
+  <h1 style="font-size:30px;font-weight:600">"Will you be my<br>girlfriend? <span class="heart-white">&#9825;</span>"</h1>
+  <br>
+  <button class="btn" onclick="accepted()">Yes!</button>
+  <button class="btn" id="noBtn" onmouseover="moveNo()" onclick="moveNo()">No</button>
+</div>
+
+<!-- PAGE 5 : DITERIMA -->
+<div class="page" id="page5">
+  <h1 style="font-size:32px;font-weight:700">Yey <span class="heart-white">&#9825;</span></h1>
+  <p style="margin-top:15px;line-height:1.7;font-size:16px">
+    Kamu baru aja bikin aku jadi orang paling bahagia hari ini.
+    Makasih ya udah mau nerima aku. Aku janji akan jaga perasaan kamu baik-baik dan nggak akan bikin kamu nyesel pernah bilang iya.
+    <br><br>
+    Sekarang kasih tau aku, date pertama kita mau ngapain?
+  </p>
+  <textarea id="dateInput" placeholder="Tulis rencana date kita..."></textarea>
+  <button class="btn" onclick="sendDate()">Kirim</button>
+</div>
+
+<!-- POPUP SALAH -->
+<div class="popup" id="popupWrong">
+  <div class="popup-box">
+    <div class="x-circle">X</div>
+    <h2>PIN Salah!</h2>
+    <p>Coba lagi ya, kodenya 123456</p>
+    <button class="btn" onclick="closePopup('popupWrong')">OK</button>
+  </div>
+</div>
+
+<!-- POPUP BERHASIL -->
+<div class="popup" id="popupDone">
+  <div class="popup-box">
+    <div class="check-circle">✓</div>
+    <h2>Berhasil!</h2>
+    <p>Rencana kamu untuk "<b id="showDate"></b>" sudah aku simpan!<br><br>Jangan lupa kirim screenshotnya ke aku ya <span style="color:#ff5da8">&#9825;</span></p>
+    <button class="btn" onclick="closePopup('popupDone')">Oke Siap!</button>
+  </div>
+</div>
+
+<script>
+let typedText = "I made this website just for u";
+let i = 0;
+function typeEffect(){
+  if(i < typedText.length){
+    document.getElementById("typing").innerHTML += typedText.charAt(i);
+    i++;
+    setTimeout(typeEffect, 70);
+  } else {
+    setTimeout(()=>{
+      document.getElementById("namePutri").style.display="block";
+      setTimeout(()=> showPage('page2'), 1800);
+    }, 500);
+  }
+}
+typeEffect();
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(id==='page4'){
+    let noBtn = document.getElementById('noBtn');
+    noBtn.style.position='static';
+  }
+}
+
+let pin = "";
+function press(num){
+  if(pin.length >= 6) return;
+  pin += num;
+  updateDots();
+  if(pin.length === 6){
+    setTimeout(()=>{
+      if(pin === "123456"){
+        showPage('page3');
+        pin=""; updateDots();
+      } else {
+        document.getElementById('popupWrong').classList.add('show');
+        pin=""; updateDots();
+      }
+    }, 300);
+  }
+}
+function updateDots(){
+  let dots = document.querySelectorAll('.dot');
+  dots.forEach((d,idx)=>{ d.classList.toggle('filled', idx < pin.length); });
+}
+function clearPin(){ pin=""; updateDots(); }
+function closePopup(id){ document.getElementById(id).classList.remove('show'); }
+
+function moveNo(){
+  let btn = document.getElementById('noBtn');
+  btn.style.position='fixed';
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 60);
+  btn.style.left = x + 'px';
+  btn.style.top = y + 'px';
+}
+function accepted(){ showPage('page5'); }
+function sendDate(){
+  let val = document.getElementById('dateInput').value;
+  if(!val){ alert('Isi dulu ya rencananya'); return; }
+  document.getElementById('showDate').innerText = val;
+  document.getElementById('popupDone').classList.add('show');
+}
+</script>
+</body>
+</html>
